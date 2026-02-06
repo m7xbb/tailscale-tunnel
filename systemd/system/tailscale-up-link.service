@@ -1,0 +1,9 @@
+[Unit]
+Description=Run script when tailscale0 link is up
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/sys/class/net/tailscale0
+
+[Service]
+Type=oneshot
+ExecStart=/etc/tailscale-tun.sh
