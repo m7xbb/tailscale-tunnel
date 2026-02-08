@@ -1,0 +1,6 @@
+[Path]
+PathChanged=/var/run/tailscale/tailscaled.sock
+Unit=tailscale-link-up.service
+
+[Install]
+WantedBy=multi-user.target
