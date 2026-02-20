@@ -17,7 +17,7 @@ You will need to use an ACL to lock down to necessary ports only
 ***Configure Tailscale services:***
 
 1. Go to [Tailscale Admin Console → Services](https://login.tailscale.com/admin/services)
-2. Create a service for each set of nodes you want to expose in tunnel mode with a tag of `tag:pihole`
+2. Create a service for each set of nodes you want to expose in tunnel mode with a tag of `tag:pihole` - eg pihole the service name will then be svc:pihole
 3. Configure ACL auto-approvers (see [Auto approve ACL Configuration](#acl-configuration))
 4. Configure Ports and Protocols (see [Ports ACL Configuration](#ports-acl-configuration))
 4. tag each Tailscale node with `tag:pihole-server`
@@ -81,7 +81,7 @@ This allows machines tagged `tag:pihole-server` to advertise services tagged `ta
 
 
 
-if Tailscale is in a docker container then this needs to be run on the host. 
+if the application is in a docker container then Tailscale needs to be installed and run on the host. 
 
 
   
