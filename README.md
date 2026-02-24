@@ -24,9 +24,9 @@ You will need to use an ACL to lock down to necessary ports only
 
 ***Configure Hosts:***
 
-1. copy tailscale-tun.sh and tailscale-service.env to /etc
+1. copy tailscale-tun.sh and tailscale-service.env.example to /etc
 
-    update tailscale-service.env with OAUTH ID, OAUTH Secret, TAILNET ID, and Service name as variables
+    rename tailscale-service.env.example to tailscale-service.env and update with OAUTH ID, OAUTH Secret, TAILNET ID, and Service name as variables
 
     then run
 
@@ -41,15 +41,6 @@ You will need to use an ACL to lock down to necessary ports only
     `systemctl enable tailscale-link-up.service`
 
     start tailscale
-
-    copy the json file and change the SERVICENAME 
-
-    `tailscale serve --service=<SERVICENAME> --tun /etc/serve.json; tailscale serve advertise <SERVICENAME>`
-
-
-
-
-
 
 ### Auto approve ACL Configuration
 

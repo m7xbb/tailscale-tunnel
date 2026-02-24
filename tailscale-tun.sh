@@ -39,6 +39,7 @@ done
 
 # ---- added due to NS caching issue ----
 nslookup api.tailscale.com
+tailscale serve --service=svc:${SERVICENAME} --tun
 
 # ---- get OAuth token ----
 token_response=$(
@@ -59,7 +60,7 @@ fi
 # ---- fetch service details ----
 service_response=$(
   curl -sS \
-    "https://api.tailscale.com/api/v2/tailnet/${TAILNET}/services/${SERVICENAME}" \
+    "https://api.tailscale.com/api/v2/tailnet/${TAILNET}/services/svc:${SERVICENAME}" \
     -H "Authorization: Bearer ${ACCESS_TOKEN}"
 )
 
@@ -67,7 +68,7 @@ service_response=$(
 mapfile -t IP_ADDRS < <(jq -r '.addrs[]' <<<"$service_response")
 
 if [[ "${#IP_ADDRS[@]}" -eq 0 ]]; then
-  echo "No IP addresses found for service ${SERVICENAME}" >&2
+  echo "No IP addresses found for service svc:${SERVICENAME}" >&2
   echo "$service_response" >&2
   exit 1
 fi
@@ -78,6 +79,8 @@ for ip in "${IP_ADDRS[@]}"; do
 if ! ip addr show dev "$INTERFACE" | grep -q "$ip"; then
   ip a add "$ip" dev "$INTERFACE"
 else
+ ip a del "$ip" dev "$INTERFACE"
+ ip a add "$ip" dev "$INTERFACE"
  echo "${ip} already added"
 fi
 
