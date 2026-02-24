@@ -1,5 +1,5 @@
-[Path]
-PathChanged=/var/run/tailscale/tailscaled.sock
+Path]
+PathChanged=/var/lib/tailscale/tailscaled.state
 Unit=tailscale-link-up.service
 
 [Install]
